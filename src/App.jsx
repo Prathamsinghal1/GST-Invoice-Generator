@@ -1,21 +1,16 @@
 import React, { useState } from "react";
-import { Plus, Trash2 } from "lucide-react";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { FaAngleDown, FaEdit } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
 import { FcPrint } from "react-icons/fc";
-import { MdCloudUpload, MdOutlineDownloadForOffline } from "react-icons/md";
+import { MdOutlineDownloadForOffline } from "react-icons/md";
 import BillTo from "./Components/BillTo/BillTo";
 import InvoiceItems from "./Components/Invoice/InvoiceItems";
-// import InvoiceGenerator from "./Components/InvoiceGenerator";
+import CompanyFrom from "./Components/Company/CompanyFrom";
 
 export default function App() {
   const [selectedColor, setSelectedColor] = useState("orange-500");
-  const [isStateFocused, setIsStateFocused] = useState(true);
-  const [isCountryFocused, setIsCountryFocused] = useState(true);
-  const [uploadedImage, setUploadedImage] = useState(null);
-  const [initialSetup, setInitialSetup] = useState(true);
-  const [headerColor, setHeaderColor] = useState([0, 0, 0]);
+  const [headerColor, setHeaderColor] = useState([255, 165, 0]);
 
   function createDataList(itemList) {
     return itemList.map((item, index) => [
@@ -352,243 +347,6 @@ export default function App() {
     doc.save("tax-invoice.pdf");
   };
 
-  const countries = [
-    "India",
-    "Afghanistan",
-    "Albania",
-    "Algeria",
-    "Andorra",
-    "Angola",
-    "Antigua and Barbuda",
-    "Argentina",
-    "Armenia",
-    "Australia",
-    "Austria",
-    "Azerbaijan",
-    "Bahamas",
-    "Bahrain",
-    "Bangladesh",
-    "Barbados",
-    "Belarus",
-    "Belgium",
-    "Belize",
-    "Benin",
-    "Bhutan",
-    "Bolivia",
-    "Bosnia and Herzegovina",
-    "Botswana",
-    "Brazil",
-    "Brunei",
-    "Bulgaria",
-    "Burkina Faso",
-    "Burundi",
-    "Cabo Verde",
-    "Cambodia",
-    "Cameroon",
-    "Canada",
-    "Central African Republic",
-    "Chad",
-    "Chile",
-    "China",
-    "Colombia",
-    "Comoros",
-    "Congo, Democratic Republic of the",
-    "Congo, Republic of the",
-    "Costa Rica",
-    "Croatia",
-    "Cuba",
-    "Cyprus",
-    "Czechia",
-    "Denmark",
-    "Djibouti",
-    "Dominica",
-    "Dominican Republic",
-    "East Timor",
-    "Ecuador",
-    "Egypt",
-    "El Salvador",
-    "Equatorial Guinea",
-    "Eritrea",
-    "Estonia",
-    "Eswatini",
-    "Ethiopia",
-    "Fiji",
-    "Finland",
-    "France",
-    "Gabon",
-    "Gambia",
-    "Georgia",
-    "Germany",
-    "Ghana",
-    "Greece",
-    "Grenada",
-    "Guatemala",
-    "Guinea",
-    "Guinea-Bissau",
-    "Guyana",
-    "Haiti",
-    "Honduras",
-    "Hungary",
-    "Iceland",
-    "Indonesia",
-    "Iran",
-    "Iraq",
-    "Ireland",
-    "Israel",
-    "Italy",
-    "Jamaica",
-    "Japan",
-    "Jordan",
-    "Kazakhstan",
-    "Kenya",
-    "Kiribati",
-    "Korea, North",
-    "Korea, South",
-    "Kosovo",
-    "Kuwait",
-    "Kyrgyzstan",
-    "Laos",
-    "Latvia",
-    "Lebanon",
-    "Lesotho",
-    "Liberia",
-    "Libya",
-    "Liechtenstein",
-    "Lithuania",
-    "Luxembourg",
-    "Madagascar",
-    "Malawi",
-    "Malaysia",
-    "Maldives",
-    "Mali",
-    "Malta",
-    "Marshall Islands",
-    "Mauritania",
-    "Mauritius",
-    "Mexico",
-    "Micronesia",
-    "Moldova",
-    "Monaco",
-    "Mongolia",
-    "Montenegro",
-    "Morocco",
-    "Mozambique",
-    "Myanmar",
-    "Namibia",
-    "Nauru",
-    "Nepal",
-    "Netherlands",
-    "New Zealand",
-    "Nicaragua",
-    "Niger",
-    "Nigeria",
-    "North Macedonia",
-    "Norway",
-    "Oman",
-    "Pakistan",
-    "Palau",
-    "Panama",
-    "Papua New Guinea",
-    "Paraguay",
-    "Peru",
-    "Philippines",
-    "Poland",
-    "Portugal",
-    "Qatar",
-    "Romania",
-    "Russia",
-    "Rwanda",
-    "Saint Kitts and Nevis",
-    "Saint Lucia",
-    "Saint Vincent and the Grenadines",
-    "Samoa",
-    "San Marino",
-    "Sao Tome and Principe",
-    "Saudi Arabia",
-    "Senegal",
-    "Serbia",
-    "Seychelles",
-    "Sierra Leone",
-    "Singapore",
-    "Slovakia",
-    "Slovenia",
-    "Solomon Islands",
-    "Somalia",
-    "South Africa",
-    "South Sudan",
-    "Spain",
-    "Sri Lanka",
-    "Sudan",
-    "Suriname",
-    "Sweden",
-    "Switzerland",
-    "Syria",
-    "Taiwan",
-    "Tajikistan",
-    "Tanzania",
-    "Thailand",
-    "Togo",
-    "Tonga",
-    "Trinidad and Tobago",
-    "Tunisia",
-    "Turkey",
-    "Turkmenistan",
-    "Tuvalu",
-    "Uganda",
-    "Ukraine",
-    "United Arab Emirates",
-    "United Kingdom",
-    "United States",
-    "Uruguay",
-    "Uzbekistan",
-    "Vanuatu",
-    "Vatican City",
-    "Venezuela",
-    "Vietnam",
-    "Yemen",
-    "Zambia",
-    "Zimbabwe",
-  ];
-
-  const states = [
-    "Andhra Pradesh",
-    "Arunachal Pradesh",
-    "Assam",
-    "Bihar",
-    "Chhattisgarh",
-    "Goa",
-    "Gujarat",
-    "Haryana",
-    "Himachal Pradesh",
-    "Jharkhand",
-    "Karnataka",
-    "Kerala",
-    "Madhya Pradesh",
-    "Maharashtra",
-    "Manipur",
-    "Meghalaya",
-    "Mizoram",
-    "Nagaland",
-    "Odisha",
-    "Punjab",
-    "Rajasthan",
-    "Sikkim",
-    "Tamil Nadu",
-    "Telangana",
-    "Tripura",
-    "Uttar Pradesh",
-    "Uttarakhand",
-    "West Bengal",
-    "Andaman and Nicobar Islands",
-    "Chandigarh",
-    "Dadra and Nagar Haveli and Daman and Diu",
-    "Lakshadweep",
-    "Delhi (National Capital Territory)",
-    "Puducherry",
-    "Jammu and Kashmir",
-    "Ladakh",
-  ];
-
   const [formData, setFormData] = useState({
     invoiceTag: "TAX INVOICE",
     company: "",
@@ -609,17 +367,7 @@ export default function App() {
     }));
   };
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0]; // Get the first selected file
-    if (file) {
-      const reader = new FileReader(); // Create a FileReader instance
-      reader.onloadend = () => {
-        setUploadedImage(reader.result); // Set the image URL in state
-      };
-      reader.readAsDataURL(file); // Read file as Data URL
-    }
-    setInitialSetup(false);
-  };
+  
 
   const [billTo, setBillTo] = useState({
     billToTag: "Bill To:",
@@ -654,11 +402,6 @@ export default function App() {
     currencySymbol: "", // Added currency symbol
   });
 
-  const handleDeleteImage = () => {
-    setUploadedImage(null);
-    setInitialSetup(true);
-  };
-
   const selectHeaderColor = (color) => {
     setSelectedColor(color);
     if (color === "black") setHeaderColor([0, 0, 0]);
@@ -678,187 +421,9 @@ export default function App() {
         </header>
 
         <main className="w-full lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <div className="w-[60%]">
-              {initialSetup && (
-                <>
-                  <div className="flex items-center space-x-4">
-                    <input
-                      type="file"
-                      id="logoImage"
-                      name="logo"
-                      accept="image/*"
-                      className="opacity-0 hidden cursor-pointer"
-                      onChange={handleImageUpload} // Handle image upload
-                    />
-                    <label
-                      htmlFor="logoImage"
-                      className="lg:min-w-[145px] py-3 bg-blue-50 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-blue-100 transition-colors duration-195 "
-                    >
-                      <MdCloudUpload className="text-blue-600 w-[30px] h-[30px]" />
-                      <span className="mt-2 text-blue-600 font-medium">
-                        Upload
-                      </span>
-                    </label>
-                    <div>
-                      <h3 className="text-lg font-semibold text-[hsl(0,0%,40%)] whitespace-nowrap">
-                        Upload Logo
-                      </h3>
-                      <p className="text-sm text-gray-500">
-                        (240 x 240 pixels)
-                      </p>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {/* Preview the uploaded image */}
-              {!initialSetup && (
-                <div className="lg:w-[40%] flex group">
-                  <div className="py-1 border border-white hover:border hover:border-purple-300 focus:border-purple-300 px-5 rounded-lg">
-                    <img
-                      src={uploadedImage}
-                      alt="Uploaded Logo"
-                      className="h-[80px] w-[80px] rounded-md border shadow-xl"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-center hidden group-hover:flex">
-                    <div
-                      className="p-2 border-y border-r border-purple-300 rounded-r-lg"
-                      onClick={handleDeleteImage}
-                    >
-                      <Trash2 className="text-red-500 w-[16px] h-[16px]" />
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className="w-[40%]">
-              <input
-                type="text"
-                name="invoiceTag"
-                className="w-full md:text-5xl sm:text-3xl text-2xl font-semibold text-[hsl(0,0%,40%)] outline-none focus:border focus:border-purple-300 hover:border hover:border-purple-300 rounded-lg p-4 py-2"
-                value={formData.invoiceTag}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
 
           {/* Bill From */}
-          <div className="flex flex-col gap-1 mt-3">
-            <div className="w-[40%] mt-2">
-              <input
-                type="text"
-                name="company" // Input name corresponds to state key
-                className="w-full rounded-lg border border-white hover:border hover:border-purple-300 focus:border-purple-300 outline-none py-1 px-2 text-[hsl(0,0%,50%)]"
-                placeholder="Your Company"
-                value={formData.company} // Controlled input bound to state
-                onChange={handleChange} // Update state on change
-              />
-            </div>
-            <div className="w-[40%]">
-              <input
-                type="text"
-                name="name"
-                className="w-full rounded-lg border border-white hover:border hover:border-purple-300 focus:border-purple-300 outline-none py-1 px-2 text-[hsl(0,0%,50%)]"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="w-[40%]">
-              <input
-                type="text"
-                name="gstin"
-                className="w-full rounded-lg border border-white hover:border hover:border-purple-300 focus:border-purple-300 outline-none py-1 px-2 text-[hsl(0,0%,50%)]"
-                placeholder="Company's GSTIN"
-                value={formData.gstin}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="w-[40%]">
-              <input
-                type="text"
-                name="address"
-                className="w-full rounded-lg border border-white hover:border hover:border-purple-300 focus:border-purple-300 outline-none py-1 px-2 text-[hsl(0,0%,50%)]"
-                placeholder="Company's Address"
-                value={formData.address}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="w-[40%]">
-              <input
-                type="text"
-                name="city"
-                className="w-full rounded-lg border border-white hover:border hover:border-purple-300 focus:border-purple-300 outline-none py-1 px-2 text-[hsl(0,0%,50%)]"
-                placeholder="City"
-                value={formData.city}
-                onChange={handleChange}
-              />
-            </div>
-            <div
-              className="w-[40%]"
-              onFocus={() => setIsStateFocused(false)}
-              onBlur={() => setIsStateFocused(true)}
-            >
-              {isStateFocused || formData.country !== "India" ? (
-                <input
-                  type="text"
-                  name="state"
-                  className="w-full rounded-lg border border-white hover:border hover:border-purple-300 focus:border-purple-300 outline-none py-1 px-2 text-[hsl(0,0%,50%)]"
-                  placeholder="State"
-                  value={formData.state}
-                  onChange={handleChange}
-                />
-              ) : (
-                <select
-                  name="state"
-                  value={formData.state}
-                  onChange={handleChange}
-                  className="w-full rounded-lg border border-white hover:border hover:border-purple-300 focus:border-purple-300 outline-none py-1 px-1 text-[hsl(0,0%,50%)]"
-                >
-                  {states.map((state, index) => (
-                    <option key={index} value={state}>
-                      {state}
-                    </option>
-                  ))}
-                </select>
-              )}
-            </div>
-
-            {/* Country Field with onFocus and onBlur */}
-            <div
-              className="w-[40%]"
-              onFocus={() => setIsCountryFocused(false)}
-              onBlur={() => setIsCountryFocused(true)}
-            >
-              {isCountryFocused ? (
-                <input
-                  type="text"
-                  name="country"
-                  className="w-full rounded-lg border border-white hover:border hover:border-purple-300 focus:border-purple-300 outline-none py-1 px-2 text-[hsl(0,0%,50%)]"
-                  placeholder="Country"
-                  value={formData.country}
-                  onChange={handleChange}
-                />
-              ) : (
-                <select
-                  name="country"
-                  value={formData.country}
-                  onChange={handleChange}
-                  className="w-full rounded-lg border border-white hover:border hover:border-purple-300 focus:border-purple-300 outline-none py-1 px-1 text-[hsl(0,0%,50%)]"
-                >
-                  {countries.map((country, index) => (
-                    <option key={index} value={country}>
-                      {country}
-                    </option>
-                  ))}
-                </select>
-              )}
-            </div>
-          </div>
-
+          <CompanyFrom formData={formData} setFormData={setFormData}/>
           <div className="border-b border-[hsl(0,0%,87%)] my-3"></div>
 
           {/* Bill To */}

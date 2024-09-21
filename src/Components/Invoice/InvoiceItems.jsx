@@ -1,62 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
 import TableItem from "./TableItem";
+import { currencies } from "../Data/Data";
 
 export default function InvoiceItems({invoiceData,setInvoiceData}) {
-
-  const currencies = [
-    { name: "US Dollar", code: "USD", symbol: "$" },
-    { name: "Euro", code: "EUR", symbol: "€" },
-    { name: "British Pound", code: "GBP", symbol: "£" },
-    { name: "Japanese Yen", code: "JPY", symbol: "¥" },
-    { name: "Australian Dollar", code: "AUD", symbol: "A$" },
-    { name: "Canadian Dollar", code: "CAD", symbol: "C$" },
-    { name: "Swiss Franc", code: "CHF", symbol: "CHF" },
-    { name: "Chinese Yuan", code: "CNY", symbol: "¥" },
-    { name: "Indian Rupee", code: "INR", symbol: "₹" },
-    { name: "South Korean Won", code: "KRW", symbol: "₩" },
-    { name: "Singapore Dollar", code: "SGD", symbol: "S$" },
-    { name: "Hong Kong Dollar", code: "HKD", symbol: "HK$" },
-    { name: "New Zealand Dollar", code: "NZD", symbol: "NZ$" },
-    { name: "Mexican Peso", code: "MXN", symbol: "$" },
-    { name: "Russian Ruble", code: "RUB", symbol: "₽" },
-    { name: "Brazilian Real", code: "BRL", symbol: "R$" },
-    { name: "South African Rand", code: "ZAR", symbol: "R" },
-    { name: "Norwegian Krone", code: "NOK", symbol: "kr" },
-    { name: "Swedish Krona", code: "SEK", symbol: "kr" },
-    { name: "Danish Krone", code: "DKK", symbol: "kr" },
-    { name: "Turkish Lira", code: "TRY", symbol: "₺" },
-    { name: "Thai Baht", code: "THB", symbol: "฿" },
-    { name: "Malaysian Ringgit", code: "MYR", symbol: "RM" },
-    { name: "Indonesian Rupiah", code: "IDR", symbol: "Rp" },
-    { name: "Philippine Peso", code: "PHP", symbol: "₱" },
-    { name: "Israeli New Shekel", code: "ILS", symbol: "₪" },
-    { name: "Chilean Peso", code: "CLP", symbol: "$" },
-    { name: "Colombian Peso", code: "COP", symbol: "$" },
-    { name: "Argentine Peso", code: "ARS", symbol: "$" },
-    { name: "Vietnamese Dong", code: "VND", symbol: "₫" },
-    { name: "Ukrainian Hryvnia", code: "UAH", symbol: "₴" },
-    { name: "Czech Koruna", code: "CZK", symbol: "Kč" },
-    { name: "Hungarian Forint", code: "HUF", symbol: "Ft" },
-    { name: "Romanian Leu", code: "RON", symbol: "lei" },
-    { name: "Bulgarian Lev", code: "BGN", symbol: "лв" },
-    { name: "Serbian Dinar", code: "RSD", symbol: "дин" },
-    { name: "Egyptian Pound", code: "EGP", symbol: "ج.م" },
-    { name: "Kuwaiti Dinar", code: "KWD", symbol: "د.ك" },
-    { name: "Bahraini Dinar", code: "BHD", symbol: ".د.ب" },
-    { name: "Omani Rial", code: "OMR", symbol: "ر.ع." },
-    { name: "Qatari Rial", code: "QAR", symbol: "ر.ق" },
-    { name: "Saudi Riyal", code: "SAR", symbol: "ر.س" },
-    { name: "UAE Dirham", code: "AED", symbol: "د.إ" },
-    { name: "Jordanian Dinar", code: "JOD", symbol: "د.أ" },
-    { name: "Lebanese Pound", code: "LBP", symbol: "ل.ل" },
-    { name: "Moroccan Dirham", code: "MAD", symbol: "د.م." },
-    { name: "Tunisian Dinar", code: "TND", symbol: "د.ت" },
-    { name: "Algerian Dinar", code: "DZD", symbol: "د.ج" },
-    { name: "Libyan Dinar", code: "LYD", symbol: "ل.د" },
-    { name: "Iraqi Dinar", code: "IQD", symbol: "ع.د" },
-  ];
-
+  
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [currencyVal, setCurrencyVal] = useState("₹");
 
