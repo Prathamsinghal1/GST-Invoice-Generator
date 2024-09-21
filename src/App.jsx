@@ -10,7 +10,7 @@ import InvoiceItems from "./Components/Invoice/InvoiceItems";
 // import InvoiceGenerator from "./Components/InvoiceGenerator";
 
 export default function App() {
-  const [selectedColor, setSelectedColor] = useState("black");
+  const [selectedColor, setSelectedColor] = useState("orange-500");
   const [isStateFocused, setIsStateFocused] = useState(true);
   const [isCountryFocused, setIsCountryFocused] = useState(true);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -898,18 +898,14 @@ export default function App() {
             <h3 className="font-semibold text-[hsl(0,0%,50%)] text-xl">
               Theme
             </h3>
-            <div className="flex space-x-3">
-              {["black", "orange-500", "blue-500", "green-500", "red-500"].map(
-                (color, index) => (
+            <div className="flex space-x-3">              
                   <button
-                    key={index}
-                    onClick={() => selectHeaderColor(color)}
-                    className={`flex items-center justify-center w-6 h-6 rounded-full bg-${color} ${
-                      color === selectedColor
-                        ? `ring-2 ring-offset-2 ${`ring-${color}`}`
+                    onClick={() => selectHeaderColor("black")}
+                    className={`flex items-center justify-center w-6 h-6 rounded-full bg-black ${
+                       selectedColor === 'black'
+                        ? "ring-2 ring-offset-2 ring-black"
                         : ""
                     }`}
-                    aria-label={`Select ${color.split("-")[1]} theme`}
                   >
                     <svg
                       xmlSpace="preserve"
@@ -925,8 +921,94 @@ export default function App() {
                       ></path>
                     </svg>
                   </button>
-                )
-              )}
+                  <button
+                    onClick={() => selectHeaderColor("orange-500")}
+                    className={`flex items-center justify-center w-6 h-6 rounded-full bg-orange-500 ${
+                      selectedColor === 'orange-500'
+                       ? "ring-2 ring-offset-2 ring-orange-500"
+                       : ""
+                   }`}
+                  >
+                    <svg
+                      xmlSpace="preserve"
+                      viewBox="0 0 24 24"
+                      className={`w-[15px] h-[15px] text-sm hover:opacity-[0.9] ${
+                        color === selectedColor ? "opacity-[0.9]" : "opacity-0"
+                      } opacity-0`}
+                      alt="Gray Color"
+                    >
+                      <path
+                        d="M8.9 20.7c-.6 0-1.2-.2-1.6-.6L1 15c-1.1-.9-1.3-2.5-.4-3.6s2.5-1.3 3.6-.4l4.5 3.7L19.6 4c1-1 2.7-1 3.7 0s1 2.7 0 3.7L10.7 20c-.5.5-1.2.7-1.8.7z"
+                        fill="#fff"
+                      ></path>
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => selectHeaderColor("blue-500")}
+                    className={`flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 ${
+                      selectedColor === 'blue-500'
+                       ? "ring-2 ring-offset-2 ring-blue-500"
+                       : ""
+                   }`}
+                  >
+                    <svg
+                      xmlSpace="preserve"
+                      viewBox="0 0 24 24"
+                      className={`w-[15px] h-[15px] text-sm hover:opacity-[0.9] ${
+                        color === selectedColor ? "opacity-[0.9]" : "opacity-0"
+                      } opacity-0`}
+                      alt="Gray Color"
+                    >
+                      <path
+                        d="M8.9 20.7c-.6 0-1.2-.2-1.6-.6L1 15c-1.1-.9-1.3-2.5-.4-3.6s2.5-1.3 3.6-.4l4.5 3.7L19.6 4c1-1 2.7-1 3.7 0s1 2.7 0 3.7L10.7 20c-.5.5-1.2.7-1.8.7z"
+                        fill="#fff"
+                      ></path>
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => selectHeaderColor("green-500")}
+                    className={`flex items-center justify-center w-6 h-6 rounded-full bg-green-500 ${
+                      selectedColor === 'green-500'
+                       ? "ring-2 ring-offset-2 ring-green-500"
+                       : ""
+                   }`}
+                  >
+                    <svg
+                      xmlSpace="preserve"
+                      viewBox="0 0 24 24"
+                      className={`w-[15px] h-[15px] text-sm hover:opacity-[0.9] ${
+                        color === selectedColor ? "opacity-[0.9]" : "opacity-0"
+                      } opacity-0`}
+                      alt="Gray Color"
+                    >
+                      <path
+                        d="M8.9 20.7c-.6 0-1.2-.2-1.6-.6L1 15c-1.1-.9-1.3-2.5-.4-3.6s2.5-1.3 3.6-.4l4.5 3.7L19.6 4c1-1 2.7-1 3.7 0s1 2.7 0 3.7L10.7 20c-.5.5-1.2.7-1.8.7z"
+                        fill="#fff"
+                      ></path>
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => selectHeaderColor("red-500")}
+                    className={`flex items-center justify-center w-6 h-6 rounded-full bg-red-500 ${
+                      selectedColor === 'red-500'
+                       ? "ring-2 ring-offset-2 ring-red-500"
+                       : ""
+                   }`}
+                  >
+                    <svg
+                      xmlSpace="preserve"
+                      viewBox="0 0 24 24"
+                      className={`w-[15px] h-[15px] text-sm hover:opacity-[0.9] ${
+                        color === selectedColor ? "opacity-[0.9]" : "opacity-0"
+                      } opacity-0`}
+                      alt="Gray Color"
+                    >
+                      <path
+                        d="M8.9 20.7c-.6 0-1.2-.2-1.6-.6L1 15c-1.1-.9-1.3-2.5-.4-3.6s2.5-1.3 3.6-.4l4.5 3.7L19.6 4c1-1 2.7-1 3.7 0s1 2.7 0 3.7L10.7 20c-.5.5-1.2.7-1.8.7z"
+                        fill="#fff"
+                      ></path>
+                    </svg>
+                  </button>
             </div>
           </div>
 
