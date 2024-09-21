@@ -155,7 +155,7 @@ export default function InvoiceItems({invoiceData,setInvoiceData}) {
       <table className="text-sm text-left text-gray-700">
         <thead>
           <tr className="uppercase text-white py-10">
-            <th className="px-3 py-2 bg-purple-500 rounded-l-lg">
+            <th className="px-4 py-2 max-sm:px-0 bg-purple-500 rounded-l-lg">
               <div className="w-[95%]">
                 <input
                   type="text"
@@ -166,7 +166,7 @@ export default function InvoiceItems({invoiceData,setInvoiceData}) {
                 />
               </div>
             </th>
-            <th className="px-4 py-2 bg-purple-500">
+            <th className="px-4 py-2 max-sm:px-0 bg-purple-500">
               <div className="w-[80%]">
                 <input
                   type="text"
@@ -177,7 +177,7 @@ export default function InvoiceItems({invoiceData,setInvoiceData}) {
                 />
               </div>
             </th>
-            <th className="px-4 py-2 bg-purple-500">
+            <th className="px-4 py-2 max-sm:px-0 bg-purple-500">
               <div className="w-[80%]">
                 <input
                   type="text"
@@ -188,9 +188,9 @@ export default function InvoiceItems({invoiceData,setInvoiceData}) {
                 />
               </div>
             </th>
-            <th className="px-4 py-2 bg-purple-500">IGST</th>
-            <th className="px-4 py-2 bg-purple-500">Cess</th>
-            <th className="px-4 py-2 bg-purple-500 rounded-r-lg">
+            <th className="max-sm:hidden px-4 py-2 bg-purple-500">IGST</th>
+            <th className="max-sm:hidden  px-4 py-2 bg-purple-500">Cess</th>
+            <th className="px-4 py-2 max-sm:px-0 bg-purple-500 rounded-r-lg">
               <div className="w-[80%]">
                 <input
                   type="text"
@@ -231,7 +231,7 @@ export default function InvoiceItems({invoiceData,setInvoiceData}) {
                 </span>
               </div>
 
-              <div className="flex justify-between">
+              <div className="max-sm:hidden flex justify-between">
                 <span className="w-[70%] rounded-lg py-1 px-1 text-[hsl(0,0%,50%)] font-medium">
                   IGST
                 </span>
@@ -240,7 +240,7 @@ export default function InvoiceItems({invoiceData,setInvoiceData}) {
                 </span>
               </div>
 
-              <div className="flex justify-between">
+              <div className="max-sm:hidden flex justify-between">
                 <span className="w-[70%] rounded-lg py-1 px-1 text-[hsl(0,0%,50%)] font-medium">
                   CESS
                 </span>
@@ -259,7 +259,7 @@ export default function InvoiceItems({invoiceData,setInvoiceData}) {
                 />
 
                 <div className="text-[hsl(0,0%,30%)] flex items-center">
-                  <div className="">
+                  <div className="md:block hidden">
                     {!currencyOpen ? (
                       <input
                         type="text"

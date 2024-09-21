@@ -738,7 +738,7 @@ export default function App() {
               <input
                 type="text"
                 name="invoiceTag"
-                className="w-full text-5xl font-semibold text-[hsl(0,0%,40%)] outline-none focus:border focus:border-purple-300 hover:border hover:border-purple-300 rounded-lg p-4 py-2"
+                className="w-full md:text-5xl sm:text-3xl text-2xl font-semibold text-[hsl(0,0%,40%)] outline-none focus:border focus:border-purple-300 hover:border hover:border-purple-300 rounded-lg p-4 py-2"
                 value={formData.invoiceTag}
                 onChange={handleChange}
               />
@@ -1021,9 +1021,10 @@ export default function App() {
             >
               Preview Invoice
             </button>
-            <div className="relative inline-block w-[30%] group">
-              <button className="w-full transition-all duration-300 transform hover:scale-105 border-2 border-[hsl(0,0%,80%)] py-2 rounded-[10px] flex items-center justify-center gap-2  hover:bg-gray-100 font-medium">
-                <h2>Download/Print</h2>
+            <div className="relative group">
+              <button className="w-full transition-all duration-300 transform hover:scale-105 border-2 border-[hsl(0,0%,80%)] py-2 rounded-[10px] flex items-center justify-center gap-2  hover:bg-gray-100 font-medium px-4">
+                <h2 className="flex max-sm:flex-col">Download/
+                <span>Print</span></h2>
                 <FaAngleDown />
               </button>
               <div className="absolute hidden group-hover:block rounded-lg w-full">

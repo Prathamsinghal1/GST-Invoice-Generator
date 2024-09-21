@@ -38,7 +38,7 @@ export default function TableItem({ invoiceData, setInvoiceData }) {
         const totalValue = parseFloat(item.value) * parseFloat(item.quantity);
         return (
           <tr key={index} className="group relative"> {/* Group for hover effect */}
-            <td className="px-4 py-2">
+            <td className="px-4 py-2 max-sm:px-0">
               <textarea
                 className="w-full rounded-lg border border-white hover:border-purple-300 focus:border-purple-300 outline-none py-1 px-2 text-[hsl(0,0%,40%)]"
                 value={item.itemName}
@@ -53,7 +53,7 @@ export default function TableItem({ invoiceData, setInvoiceData }) {
                 onChange={(e) => handleChange(index, "hsn", e.target.value)}
               />
             </td>
-            <td className="px-4 py-2">
+            <td className="px-4 py-2 max-sm:px-0">
               <input
                 type="number"
                 value={item.quantity}
@@ -62,7 +62,7 @@ export default function TableItem({ invoiceData, setInvoiceData }) {
                 
               />
             </td>
-            <td className="px-4 py-2">
+            <td className="px-4 py-2 max-sm:px-0">
               <input
                 type="text"
                 value={item.value}
@@ -70,7 +70,7 @@ export default function TableItem({ invoiceData, setInvoiceData }) {
                 onChange={(e) => handleChange(index, "value", e.target.value)}
               />
             </td>
-            <td className="px-4 py-2">
+            <td className="max-sm:hidden px-4 py-2">
               <input
                 type="number"
                 value={item.igst}
@@ -82,7 +82,7 @@ export default function TableItem({ invoiceData, setInvoiceData }) {
               </div>
             </td>
 
-            <td className="px-4 py-2">
+            <td className="max-sm:hidden px-4 py-2">
               <input
                 type="number"
                 value={item.cess}
@@ -94,7 +94,7 @@ export default function TableItem({ invoiceData, setInvoiceData }) {
               </div>
             </td>
             
-            <td className="px-7 py-2 text-right">
+            <td className="px-7 py-2 text-right max-sm:pl-0">
               {item.quantity ? (totalValue + igstAmount + cessAmount).toFixed(2):'0.00'}
             </td>
 
