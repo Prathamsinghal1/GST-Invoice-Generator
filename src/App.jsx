@@ -911,7 +911,7 @@ export default function App() {
                       xmlSpace="preserve"
                       viewBox="0 0 24 24"
                       className={`w-[15px] h-[15px] text-sm hover:opacity-[0.9] ${
-                        color === selectedColor ? "opacity-[0.9]" : "opacity-0"
+                        selectedColor === 'black' ? "opacity-[0.9]" : "opacity-0"
                       } opacity-0`}
                       alt="Gray Color"
                     >
@@ -933,7 +933,7 @@ export default function App() {
                       xmlSpace="preserve"
                       viewBox="0 0 24 24"
                       className={`w-[15px] h-[15px] text-sm hover:opacity-[0.9] ${
-                        color === selectedColor ? "opacity-[0.9]" : "opacity-0"
+                        selectedColor === 'orange-500' ? "opacity-[0.9]" : "opacity-0"
                       } opacity-0`}
                       alt="Gray Color"
                     >
@@ -955,7 +955,7 @@ export default function App() {
                       xmlSpace="preserve"
                       viewBox="0 0 24 24"
                       className={`w-[15px] h-[15px] text-sm hover:opacity-[0.9] ${
-                        color === selectedColor ? "opacity-[0.9]" : "opacity-0"
+                        selectedColor === 'blue-500' ? "opacity-[0.9]" : "opacity-0"
                       } opacity-0`}
                       alt="Gray Color"
                     >
@@ -977,7 +977,7 @@ export default function App() {
                       xmlSpace="preserve"
                       viewBox="0 0 24 24"
                       className={`w-[15px] h-[15px] text-sm hover:opacity-[0.9] ${
-                        color === selectedColor ? "opacity-[0.9]" : "opacity-0"
+                        selectedColor === 'green-500' ? "opacity-[0.9]" : "opacity-0"
                       } opacity-0`}
                       alt="Gray Color"
                     >
@@ -999,7 +999,7 @@ export default function App() {
                       xmlSpace="preserve"
                       viewBox="0 0 24 24"
                       className={`w-[15px] h-[15px] text-sm hover:opacity-[0.9] ${
-                        color === selectedColor ? "opacity-[0.9]" : "opacity-0"
+                        selectedColor === 'red-500' ? "opacity-[0.9]" : "opacity-0"
                       } opacity-0`}
                       alt="Gray Color"
                     >
