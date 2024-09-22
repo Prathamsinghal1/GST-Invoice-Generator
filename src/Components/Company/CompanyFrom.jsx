@@ -42,7 +42,7 @@ export default function CompanyFrom({ formData, setFormData }) {
   return (
     <div>
       <div className="flex justify-between items-center">
-        <div className="w-[60%]">
+        <div className="w-[60%] max-sm:w-[50%]">
           {initialSetup && (
             <>
               <div className="flex items-center space-x-4">
@@ -56,13 +56,13 @@ export default function CompanyFrom({ formData, setFormData }) {
                 />
                 <label
                   htmlFor="logoImage"
-                  className="lg:min-w-[145px] py-3 bg-blue-50 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-blue-100 transition-colors duration-195 "
+                  className="min-w-[125px] max-sm:min-w-[100px] py-3 bg-blue-50 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-blue-100 transition-colors duration-195 "
                 >
                   <MdCloudUpload className="text-blue-600 w-[30px] h-[30px]" />
-                  <span className="mt-2 text-blue-600 font-medium">Upload</span>
+                  <span className="mt-2 text-blue-600 font-medium px-2">Upload</span>
                 </label>
-                <div>
-                  <h3 className="text-lg font-semibold text-[hsl(0,0%,40%)] whitespace-nowrap">
+                <div className="max-sm:hidden">
+                  <h3 className="md:text-xl font-semibold text-[hsl(0,0%,40%)]">
                     Upload Logo
                   </h3>
                   <p className="text-sm text-gray-500">(240 x 240 pixels)</p>
@@ -93,11 +93,11 @@ export default function CompanyFrom({ formData, setFormData }) {
           )}
         </div>
 
-        <div className="w-[40%]">
+        <div className="w-[40%] max-sm:w-[50%]">
           <input
             type="text"
             name="invoiceTag"
-            className="w-full md:text-5xl sm:text-3xl text-2xl font-semibold text-[hsl(0,0%,40%)] outline-none focus:border focus:border-purple-300 hover:border hover:border-purple-300 rounded-lg p-4 py-2"
+            className="w-full md:text-5xl sm:text-3xl text-2xl font-semibold text-[hsl(0,0%,40%)] outline-none focus:border focus:border-purple-300 hover:border hover:border-purple-300 rounded-lg px-4 sm:px-2 max-sm:px-0 py-2"
             value={formData.invoiceTag}
             onChange={handleChange}
           />

@@ -165,7 +165,7 @@ export default function InvoiceItems({invoiceData,setInvoiceData}) {
         </button>
         <div className="px-4 py-3 bg-gray-50">
           <div className="space-y-1">
-            <div className="min-h-[200px] flex flex-col justify-between">
+            <div className="max-sm:min-h-[93px] min-h-[200px] flex flex-col justify-between">
               <div className="flex justify-between">
                 <input
                   type="text"
