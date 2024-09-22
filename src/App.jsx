@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { FaAngleDown } from "react-icons/fa";
@@ -27,6 +27,20 @@ export default function App() {
 
   const generateAndPreviewPDF = () => {
     const doc = new jsPDF();
+
+    var offset = 20;
+
+    // Adding Image
+    if(formData.imageSrc && formData.imageExtension){
+      offset=15;
+      try {
+        doc.addImage(formData.imageSrc,formData.imageExtension, 15, offset, 25, 25);
+      } catch (error) {
+        alert(`Image not supported, try again!`);
+      }
+      offset+=30;
+    }
+  
     doc.setFontSize(25);
     
     const invoiceTopTagWidth = doc.getTextWidth(`${formData.invoiceTag}`);
@@ -35,34 +49,34 @@ export default function App() {
     // Make sure robotoMediumBase64 is correctly defined
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
-    doc.text(`${formData.company}`, 15, 25);
+    doc.text(`${formData.company}`, 15, offset+=5);
 
     doc.setFontSize(11);
     doc.addFont("Roboto-Medium.ttf", "Roboto-Medium", "normal");
     doc.setFont("Roboto-Medium", "normal");
 
-    doc.text(`${formData.name==='' ? "_______________________________":formData.name}`, 15, 30);
-    doc.text(`${formData.address==='' ? "_______________________________":formData.address}`, 15, 35);
-    doc.text(`${formData.city==='' ? "________________":formData.city}`, 15, 40);
-    doc.text(`${formData.state==='' ? "________________":formData.state}`, 15, 45);
-    doc.text(`${formData.country}`, 15, 50);
-    doc.text(`GSTIN ${formData.gstin==='' ? "________________":formData.gstin}`, 15, 55);
+    doc.text(`${formData.name==='' ? "_______________________________":formData.name}`, 15, offset+=5);
+    doc.text(`${formData.address==='' ? "_______________________________":formData.address}`, 15, offset+=5);
+    doc.text(`${formData.city==='' ? "________________":formData.city}`, 15, offset+=5);
+    doc.text(`${formData.state==='' ? "________________":formData.state}`, 15, offset+=5);
+    doc.text(`${formData.country}`, 15, offset+=5);
+    doc.text(`GSTIN ${formData.gstin==='' ? "________________":formData.gstin}`, 15, offset+=5);
 
     doc.setFontSize(10);
     doc.setTextColor(102, 102, 102);
-    doc.text(`${billTo.billToTag}`, 15, 65);
+    doc.text(`${billTo.billToTag}`, 15, offset+=5);
     
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(11);
-    doc.text(`${billTo.clientCompany==='' ? "_______________________________":billTo.clientCompany}`, 15, 70);
-    doc.text(`${billTo.clientAddress==='' ? "_______________________________":billTo.clientAddress}`, 15, 75);
-    doc.text(`${billTo.clientCity==='' ? "________________":billTo.clientCity===''}`, 15, 80);
-    doc.text(`${billTo.clientCountry}`, 15, 85);
-    doc.text(`GSTIN ${billTo.clientGstin==='' ? "________________":billTo.clientGstin}`, 15, 90);
+    doc.text(`${billTo.clientCompany==='' ? "_______________________________":billTo.clientCompany}`, 15, offset+=5);
+    doc.text(`${billTo.clientAddress==='' ? "_______________________________":billTo.clientAddress}`, 15, offset+=5);
+    doc.text(`${billTo.clientCity==='' ? "________________":billTo.clientCity}`, 15, offset+=5);
+    doc.text(`${billTo.clientCountry}`, 15, offset+=5);
+    doc.text(`GSTIN ${billTo.clientGstin==='' ? "________________":billTo.clientGstin}`, 15, offset+=5);
 
     doc.setFontSize(10);
     doc.setTextColor(102, 102, 102);
-    doc.text(`Place Of Supply: ${billTo.clientState==='' ? "________________":billTo.clientState}`, 15, 100);
+    doc.text(`Place Of Supply: ${billTo.clientState==='' ? "________________":billTo.clientState}`, 15, offset+=10);
     
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(11);
@@ -80,19 +94,16 @@ export default function App() {
 
     doc.setFontSize(10);
     doc.setTextColor(102, 102, 102);
-    doc.text(`${billTo.invoiceDateTag}`, 195-invoiceDateWidth-invoiceDateTagWidth, 83);
-    doc.text(`${billTo.dueDateTag}`, 195-invoiceDateWidth-dueDateTagWidth, 93);
+    doc.text(`${billTo.invoiceDateTag}`, 195-invoiceDateWidth-invoiceDateTagWidth, offset-17);
+    doc.text(`${billTo.dueDateTag}`, 195-invoiceDateWidth-dueDateTagWidth, offset-7);
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(11);
-    doc.text(`${billTo.invoiceDate}`, 195-invoiceDateWidth, 83);
-    doc.text(`${billTo.dueDate}`, 195-dueDateWidth, 93);
+    doc.text(`${billTo.invoiceDate}`, 195-invoiceDateWidth, offset-17);
+    doc.text(`${billTo.dueDate}`, 195-dueDateWidth, offset-7);
     
 
     // Table Created
-    const listData = createDataList(invoiceData.itemList);
-
-    var offset = 0;
-    
+    const listData = createDataList(invoiceData.itemList);    
 
     const header = [
       [
@@ -107,10 +118,12 @@ export default function App() {
       ],
     ];
 
+    offset+=10;
+
     doc.autoTable({
       head: header,
       body: listData,
-      startY: 110, // Set Y offset for the table
+      startY: offset, // Set Y offset for the table
 
       // Header styles
       headStyles: {
@@ -184,13 +197,24 @@ export default function App() {
     // Create a Blob object from the PDF
     const pdfData = doc.output("blob");
 
-    // Get the iframe and set its source as the PDF blob URL
-    const iframe = document.getElementById("pdf-preview");
-    iframe.src = URL.createObjectURL(pdfData);
   };
 
   const generatePDF = () => {
     const doc = new jsPDF();
+
+    var offset = 20;
+
+    // Adding Image
+    if(formData.imageSrc && formData.imageExtension){
+      offset=15;
+      try {
+        doc.addImage(formData.imageSrc,formData.imageExtension, 15, offset, 25, 25);
+      } catch (error) {
+        alert(`Image not supported, try again!`);
+      }
+      offset+=30;
+    }
+  
     doc.setFontSize(25);
     
     const invoiceTopTagWidth = doc.getTextWidth(`${formData.invoiceTag}`);
@@ -199,34 +223,34 @@ export default function App() {
     // Make sure robotoMediumBase64 is correctly defined
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
-    doc.text(`${formData.company}`, 15, 25);
+    doc.text(`${formData.company}`, 15, offset+=5);
 
     doc.setFontSize(11);
     doc.addFont("Roboto-Medium.ttf", "Roboto-Medium", "normal");
     doc.setFont("Roboto-Medium", "normal");
 
-    doc.text(`${formData.name}`, 15, 30);
-    doc.text(`${formData.address}`, 15, 35);
-    doc.text(`${formData.city}`, 15, 40);
-    doc.text(`${formData.state}`, 15, 45);
-    doc.text(`${formData.country}`, 15, 50);
-    doc.text(`GSTIN ${formData.gstin}`, 15, 55);
+    doc.text(`${formData.name==='' ? "_______________________________":formData.name}`, 15, offset+=5);
+    doc.text(`${formData.address==='' ? "_______________________________":formData.address}`, 15, offset+=5);
+    doc.text(`${formData.city==='' ? "________________":formData.city}`, 15, offset+=5);
+    doc.text(`${formData.state==='' ? "________________":formData.state}`, 15, offset+=5);
+    doc.text(`${formData.country}`, 15, offset+=5);
+    doc.text(`GSTIN ${formData.gstin==='' ? "________________":formData.gstin}`, 15, offset+=5);
 
     doc.setFontSize(10);
     doc.setTextColor(102, 102, 102);
-    doc.text(`${billTo.billToTag}`, 15, 65);
+    doc.text(`${billTo.billToTag}`, 15, offset+=5);
     
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(11);
-    doc.text(`${billTo.clientCompany}`, 15, 70);
-    doc.text(`${billTo.clientAddress}`, 15, 75);
-    doc.text(`${billTo.clientCity}`, 15, 80);
-    doc.text(`${billTo.clientCountry}`, 15, 85);
-    doc.text(`GSTIN ${billTo.clientGstin}`, 15, 90);
+    doc.text(`${billTo.clientCompany==='' ? "_______________________________":billTo.clientCompany}`, 15, offset+=5);
+    doc.text(`${billTo.clientAddress==='' ? "_______________________________":billTo.clientAddress}`, 15, offset+=5);
+    doc.text(`${billTo.clientCity==='' ? "________________":billTo.clientCity}`, 15, offset+=5);
+    doc.text(`${billTo.clientCountry}`, 15, offset+=5);
+    doc.text(`GSTIN ${billTo.clientGstin==='' ? "________________":billTo.clientGstin}`, 15, offset+=5);
 
     doc.setFontSize(10);
     doc.setTextColor(102, 102, 102);
-    doc.text(`Place Of Supply: ${billTo.clientState}`, 15, 100);
+    doc.text(`Place Of Supply: ${billTo.clientState==='' ? "________________":billTo.clientState}`, 15, offset+=10);
     
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(11);
@@ -244,19 +268,16 @@ export default function App() {
 
     doc.setFontSize(10);
     doc.setTextColor(102, 102, 102);
-    doc.text(`${billTo.invoiceDateTag}`, 195-invoiceDateWidth-invoiceDateTagWidth, 83);
-    doc.text(`${billTo.dueDateTag}`, 195-invoiceDateWidth-dueDateTagWidth, 93);
+    doc.text(`${billTo.invoiceDateTag}`, 195-invoiceDateWidth-invoiceDateTagWidth, offset-17);
+    doc.text(`${billTo.dueDateTag}`, 195-invoiceDateWidth-dueDateTagWidth, offset-7);
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(11);
-    doc.text(`${billTo.invoiceDate}`, 195-invoiceDateWidth, 83);
-    doc.text(`${billTo.dueDate}`, 195-dueDateWidth, 93);
+    doc.text(`${billTo.invoiceDate}`, 195-invoiceDateWidth, offset-17);
+    doc.text(`${billTo.dueDate}`, 195-dueDateWidth, offset-7);
     
 
     // Table Created
-    const listData = createDataList(invoiceData.itemList);
-
-    var offset = 0;
-    
+    const listData = createDataList(invoiceData.itemList);    
 
     const header = [
       [
@@ -271,10 +292,12 @@ export default function App() {
       ],
     ];
 
+    offset+=10;
+
     doc.autoTable({
       head: header,
       body: listData,
-      startY: 110, // Set Y offset for the table
+      startY: offset, // Set Y offset for the table
 
       // Header styles
       headStyles: {
@@ -346,8 +369,10 @@ export default function App() {
     
     doc.save("tax-invoice.pdf");
   };
-
+  
   const [formData, setFormData] = useState({
+    imageSrc: null,
+    imageExtension: null,
     invoiceTag: "TAX INVOICE",
     company: "",
     name: "",
@@ -359,6 +384,16 @@ export default function App() {
     notesTag: "Notes",
     notesText: "It was great doing business with you.",
   });
+
+  useEffect(()=>{
+    if(formData.imageSrc)
+      setFormData((prevState) => ({
+        ...prevState,
+        ["imageExtension"]: formData.imageSrc.split(';')[0].split('/')[1],
+      }));
+  },[formData.imageSrc]);
+  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
@@ -438,6 +473,7 @@ export default function App() {
             setInvoiceData={setInvoiceData}
           />
 
+          {/* Notes */}
           <div className="mt-8">
             <input className="w-full rounded-lg border border-white hover:border-purple-300 focus:border-purple-300 outline-none py-1 px-2 text-[hsl(0,0%,40%)] font-medium mb-1" 
             value={formData.notesTag}

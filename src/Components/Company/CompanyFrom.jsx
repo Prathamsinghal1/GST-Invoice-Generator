@@ -1,38 +1,44 @@
 import React, { useState } from "react";
 import { countries, states } from "./../Data/Data";
-import { Trash2 } from "lucide-react"; 
+import { Trash2 } from "lucide-react";
 import { MdCloudUpload } from "react-icons/md";
 
-export default function CompanyFrom({formData,setFormData}) {
-    
+export default function CompanyFrom({ formData, setFormData }) {
   const [isStateFocused, setIsStateFocused] = useState(true);
   const [isCountryFocused, setIsCountryFocused] = useState(true);
-  const [uploadedImage, setUploadedImage] = useState(null);
   const [initialSetup, setInitialSetup] = useState(true);
 
   const handleDeleteImage = () => {
-    setUploadedImage(null);
+    setFormData((prevState) => ({
+      ...prevState,
+      ["imageSrc"]: null, // Update the specific field in formData
+    }));
     setInitialSetup(true);
   };
-    const handleImageUpload = (event) => {
-        const file = event.target.files[0]; // Get the first selected file
-        if (file) {
-          const reader = new FileReader(); // Create a FileReader instance
-          reader.onloadend = () => {
-            setUploadedImage(reader.result); // Set the image URL in state
-          };
-          reader.readAsDataURL(file); // Read file as Data URL
-        }
-        setInitialSetup(false);
-      };
 
-      const handleChange = (event) => {
-        const { name, value } = event.target;
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0]; // Get the first selected file
+    if (file) {
+      const reader = new FileReader(); // Create a FileReader instance
+      reader.onloadend = () => {
         setFormData((prevState) => ({
           ...prevState,
-          [name]: value, // Update the specific field in formData
+          ["imageSrc"]: reader.result, // Update the specific field in formData
         }));
       };
+      reader.readAsDataURL(file); // Read file as Data URL
+    }
+    setInitialSetup(false);
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value, // Update the specific field in formData
+    }));
+  };
+  
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -70,7 +76,7 @@ export default function CompanyFrom({formData,setFormData}) {
             <div className="lg:w-[40%] flex group">
               <div className="py-1 border border-white hover:border hover:border-purple-300 focus:border-purple-300 px-5 rounded-lg">
                 <img
-                  src={uploadedImage}
+                  src={formData.imageSrc}
                   alt="Uploaded Logo"
                   className="h-[80px] w-[80px] rounded-md border shadow-xl"
                 />
